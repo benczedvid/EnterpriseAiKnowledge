@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using EnterpriseAI.Application.Abstractions.AI;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -53,6 +54,7 @@ public sealed class OllamaLlmService : ILlmService
             Think = _options.Think,
             Stream = false,
             KeepAlive = "30m",
+            Format = ParseResponseJsonSchema(request.ResponseJsonSchema),
             Options = new OllamaChatOptions
                 {
                     NumberOfPredictedTokens = _options.MaximumOutputTokens,
@@ -94,6 +96,28 @@ public sealed class OllamaLlmService : ILlmService
         }
 
         return new LlmResponse(content);
+    }
+
+    private static JsonElement? ParseResponseJsonSchema(string? responseJsonSchema)
+    {
+        if (string.IsNullOrWhiteSpace(responseJsonSchema))
+        {
+            return null;
+        }
+
+        try
+        {
+            using var document = JsonDocument.Parse(responseJsonSchema);
+
+            return document.RootElement.Clone();
+        }
+        catch (JsonException exception)
+        {
+            throw new ArgumentException(
+                "The response JSON schema is not valid JSON.",
+                nameof(responseJsonSchema),
+                exception);
+        }
     }
 
     private async Task<HttpResponseMessage> PostWithRetryAsync(
