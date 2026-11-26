@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace EnterpriseAI.Infrastructure.AI.Ollama;
@@ -19,6 +20,14 @@ internal sealed class OllamaChatRequest
     [JsonPropertyName("options")]
     public required OllamaChatOptions Options { get; init; }
     
+    /*
+     * Strukturált kimenet: JSON Schema, amelyhez az Ollama
+     * a generálást korlátozza. Null esetén nem kerül a kérésbe.
+     */
+    [JsonPropertyName("format")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public JsonElement? Format { get; init; }
+
     [JsonPropertyName("keep_alive")]
     public string KeepAlive { get; init; } = "30m";
 }

@@ -13,6 +13,28 @@ public sealed partial class AskKnowledgeHandler
     private const int MaximumRetrievalLimit = 10;
     private const double MinimumSimilarity = 0.60;
 
+    private const string ModelOutputFailureMessage = "A válasz nem állítható elő megbízható formában. Kérlek, próbáld újra, vagy fogalmazd át a kérdést.";
+
+    /*
+     * Az Ollama structured output (format mező) ezzel a sémával
+     * korlátozza a modell kimenetét, így a válasz mindig
+     * szintaktikailag érvényes JSON-objektum.
+     */
+    private const string GroundedAnswerJsonSchema = """
+        {
+          "type": "object",
+          "properties": {
+            "canAnswer": { "type": "boolean" },
+            "answer": { "type": "string" },
+            "usedSourceNumbers": {
+              "type": "array",
+              "items": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "required": ["canAnswer", "answer", "usedSourceNumbers"]
+        }
+        """;
+
     private const string NoAnswerMessage = "A rendelkezésre álló vállalati dokumentumok alapján nem található megbízható válasz a kérdésre.";
 
     private static readonly JsonSerializerOptions
@@ -115,9 +137,39 @@ public sealed partial class AskKnowledgeHandler
             return CreateNoAnswerResponse(question, NoAnswerMessage);
         }
 
+        try
+        {
+            return await AnswerFromSourcesAsync(
+                question,
+                relevantResults,
+                cancellationToken);
+        }
+        catch (InvalidModelOutputException exception)
+        {
+            /*
+             * A modell a javító és az ismételt kérés után sem adott
+             * feldolgozható, ellenőrizhető döntést. Nem dobunk 500-at,
+             * hanem kezelt no-answer választ adunk vissza.
+             */
+            _logger.LogWarning(
+                exception,
+                "The AI model did not return a usable grounded-answer decision. " +
+                "Returning no-answer. Question={Question}",
+                question);
+
+            return CreateNoAnswerResponse(question, ModelOutputFailureMessage);
+        }
+    }
+
+    private async Task<AskKnowledgeResponse> AnswerFromSourcesAsync(
+        string question,
+        IReadOnlyList<RelevantSearchResult> relevantResults,
+        CancellationToken cancellationToken)
+    {
         var llmRequest = new LlmRequest(
             SystemPrompt: BuildSystemPrompt(),
-            UserPrompt: BuildUserPrompt(question, relevantResults));
+            UserPrompt: BuildUserPrompt(question, relevantResults),
+            ResponseJsonSchema: GroundedAnswerJsonSchema);
 
         var decision = await GenerateDecisionAsync(llmRequest, cancellationToken);
 
@@ -177,7 +229,7 @@ public sealed partial class AskKnowledgeHandler
                 "A forrás csak kitöltetlen dátummezőt tartalmaz, ezért a kért időpont nem állapítható meg.");
         }
 
-        var usedSourceNumbers = NormalizeAndValidateSourceNumbers(decision, relevantResults.Length);
+        var usedSourceNumbers = NormalizeAndValidateSourceNumbers(decision, relevantResults.Count);
 
         /*
         * A forrásalapú válasznak legalább egy ténylegesen
@@ -199,12 +251,12 @@ public sealed partial class AskKnowledgeHandler
         var normalizedAnswer = EnsureAnswerCitations(
             decision.Answer,
             usedSourceNumbers,
-            relevantResults.Length);
+            relevantResults.Count);
 
         ValidateAnswerCitations(
             normalizedAnswer,
             usedSourceNumbers,
-            relevantResults.Length);
+            relevantResults.Count);
 
         var orderedSourceNumbers = usedSourceNumbers
             .Distinct()
@@ -394,7 +446,7 @@ public sealed partial class AskKnowledgeHandler
     {
         if (string.IsNullOrWhiteSpace(modelResponse))
         {
-            throw new InvalidOperationException("The AI model returned an empty response.");
+            throw new InvalidModelOutputException("The AI model returned an empty response.");
         }
 
         var normalizedResponse = NormalizeJsonResponse(modelResponse);
@@ -407,19 +459,19 @@ public sealed partial class AskKnowledgeHandler
         }
         catch (JsonException exception)
         {
-            throw new InvalidOperationException(
+            throw new InvalidModelOutputException(
                 "The AI model returned an invalid grounded-answer response.",
                 exception);
         }
 
         if (decision is null)
         {
-            throw new InvalidOperationException("The AI model returned no grounded-answer decision.");
+            throw new InvalidModelOutputException("The AI model returned no grounded-answer decision.");
         }
 
         if (string.IsNullOrWhiteSpace(decision.Answer))
         {
-            throw new InvalidOperationException("The grounded-answer decision contains no answer text.");
+            throw new InvalidModelOutputException("The grounded-answer decision contains no answer text.");
         }
 
         var usedSourceNumbers = decision.UsedSourceNumbers ?? [];
@@ -451,7 +503,7 @@ public sealed partial class AskKnowledgeHandler
         {
             if (sourceNumber < 1 || sourceNumber > sourceCount)
             {
-                throw new InvalidOperationException(
+                throw new InvalidModelOutputException(
                     $"The AI model referenced invalid source number {sourceNumber}. Available sources: 1-{sourceCount}.");
             }
         }
@@ -468,19 +520,19 @@ public sealed partial class AskKnowledgeHandler
 
         if (citedSourceNumbers.Count == 0)
         {
-            throw new InvalidOperationException("The grounded answer contains no numeric source citation.");
+            throw new InvalidModelOutputException("The grounded answer contains no numeric source citation.");
         }
 
         foreach (var citedSourceNumber in citedSourceNumbers)
         {
             if (citedSourceNumber < 1 || citedSourceNumber > availableSourceCount)
             {
-                throw new InvalidOperationException($"The grounded answer contains invalid citation [{citedSourceNumber}].");
+                throw new InvalidModelOutputException($"The grounded answer contains invalid citation [{citedSourceNumber}].");
             }
 
             if (!usedSourceNumbers.Contains(citedSourceNumber))
             {
-                throw new InvalidOperationException($"The answer cites source [{citedSourceNumber}], but that source is missing from usedSourceNumbers.");
+                throw new InvalidModelOutputException($"The answer cites source [{citedSourceNumber}], but that source is missing from usedSourceNumbers.");
             }
         }
 
@@ -488,7 +540,7 @@ public sealed partial class AskKnowledgeHandler
         {
             if (!citedSourceNumbers.Contains(sourceNumber))
             {
-                throw new InvalidOperationException(
+                throw new InvalidModelOutputException(
                     $"Source {sourceNumber} is listed in usedSourceNumbers, but the answer does not contain citation [{sourceNumber}].");
             }
         }
@@ -615,7 +667,7 @@ public sealed partial class AskKnowledgeHandler
     {
         if (string.IsNullOrWhiteSpace(modelResponse))
         {
-            throw new InvalidOperationException(
+            throw new InvalidModelOutputException(
                 "The AI model returned an empty grounded-answer response.");
         }
 
@@ -698,6 +750,15 @@ public sealed partial class AskKnowledgeHandler
         */
         normalized = ExtractJsonObject(normalized);
 
+        /*
+         * Kisebb modellek a usedSourceNumbers tömbben néha
+         * érvénytelen számokat adnak vissza, például vezető
+         * nullát ([01]), idézőjeles számot (["1"]) vagy
+         * hiányzó vesszőt ([1 2]). A tömb tartalmát egész
+         * számok listájára normalizáljuk.
+         */
+        normalized = NormalizeUsedSourceNumbers(normalized);
+
         return normalized;
     }
 
@@ -709,13 +770,18 @@ public sealed partial class AskKnowledgeHandler
         {
             return ParseDecision(initialResponse.Content);
         }
-        catch (InvalidOperationException exception)
-            when (exception.InnerException is JsonException)
+        catch (InvalidModelOutputException exception)
         {
+            _logger.LogWarning(
+                exception,
+                "The AI model returned an unusable grounded-answer response. " +
+                "Sending a JSON repair request.");
+
             var repairRequest = new LlmRequest(
                 SystemPrompt: BuildJsonRepairSystemPrompt(),
                 UserPrompt: BuildJsonRepairUserPrompt(
-                    initialResponse.Content));
+                    initialResponse.Content),
+                ResponseJsonSchema: GroundedAnswerJsonSchema);
 
             var repairedResponse = await _llmService.GenerateAsync(
                 repairRequest,
@@ -861,7 +927,8 @@ public sealed partial class AskKnowledgeHandler
             - usedSourceNumbers legyen üres tömb.
 
             KIZÁRÓLAG egyetlen érvényes JSON-objektumot adj vissza.
-            """);
+            """,
+            ResponseJsonSchema: GroundedAnswerJsonSchema);
 
         return await GenerateDecisionAsync(
             retryRequest,
@@ -924,6 +991,30 @@ public sealed partial class AskKnowledgeHandler
 
     [GeneratedRegex(@"\s+", RegexOptions.CultureInvariant)]
     private static partial Regex WhitespaceRegex();
+
+    [GeneratedRegex(
+        @"(""usedSourceNumbers""\s*:\s*)\[([^\[\]]*)\]",
+        RegexOptions.CultureInvariant | RegexOptions.IgnoreCase)]
+    private static partial Regex UsedSourceNumbersArrayRegex();
+
+    [GeneratedRegex(@"\d+", RegexOptions.CultureInvariant)]
+    private static partial Regex IntegerRegex();
+
+    private static string NormalizeUsedSourceNumbers(string json)
+    {
+        return UsedSourceNumbersArrayRegex().Replace(
+            json,
+            match =>
+            {
+                var numbers = IntegerRegex()
+                    .Matches(match.Groups[2].Value)
+                    .Select(number => int.TryParse(number.Value, out var value) ? value : (int?)null)
+                    .Where(number => number.HasValue)
+                    .Select(number => number!.Value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+
+                return $"{match.Groups[1].Value}[{string.Join(", ", numbers)}]";
+            });
+    }
 
     private sealed record RelevantSearchResult(
         SemanticSearchResult Result,
