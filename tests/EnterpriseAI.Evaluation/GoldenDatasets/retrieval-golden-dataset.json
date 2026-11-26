@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "createdAt": "2026-11-22",
   "description": "Initial retrieval evaluation dataset for the Enterprise AI Knowledge SharePoint corpus.",
   "cases": [
@@ -9,7 +9,7 @@
       "category": "fact-list",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
@@ -30,7 +30,7 @@
       "category": "fact",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
@@ -50,7 +50,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
@@ -70,7 +70,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
@@ -91,7 +91,7 @@
       "category": "procedure",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "requiredContentTerms": [
@@ -112,7 +112,7 @@
       "category": "procedure",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "requiredContentTerms": [
@@ -134,7 +134,7 @@
       "category": "fact",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "requiredContentTerms": [
@@ -154,7 +154,7 @@
       "category": "fact",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "requiredContentTerms": [
@@ -174,7 +174,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "requiredContentTerms": [
@@ -194,7 +194,7 @@
       "category": "deadline",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "requiredContentTerms": [
