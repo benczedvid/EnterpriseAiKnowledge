@@ -1,0 +1,49 @@
+{
+  "datasetVersion": "1.0",
+  "cases": [
+    {
+      "id": "ambiguous-001",
+      "question": "Mit kell ellenőrizni a megrendelésben, mielőtt kapcsolatba lépünk a vásárlóval?",
+      "category": "ambiguous-query",
+      "shouldAnswer": false,
+      "expectedBehavior": "clarification",
+      "clarificationShouldMentionAny": [
+        "melyik folyamat",
+        "milyen megrendelés",
+        "előleg",
+        "online hitel",
+        "áttárolás"
+      ],
+      "notes": "A korpuszban több megrendelési folyamat is megfelelhet."
+    },
+    {
+      "id": "ambiguous-002",
+      "question": "Mi a teendő, ha a vásárlót többszöri próbálkozás után sem lehet elérni?",
+      "category": "ambiguous-query",
+      "shouldAnswer": false,
+      "expectedBehavior": "clarification",
+      "clarificationShouldMentionAny": [
+        "melyik ügy",
+        "melyik folyamat",
+        "előleg",
+        "megrendelés"
+      ],
+      "notes": "A kontextus nélküli kérdés több dokumentumra is illeszkedhet."
+    },
+    {
+    "id": "ambiguous-unused-cash-advance-product-001",
+    "question": "Mi történjen a megrendelésben szereplő termékkel az előleg rendezése után?",
+    "category": "ambiguous-query",
+    "shouldAnswer": false,
+    "expectedBehavior": "clarification",
+    "clarificationShouldMentionAny": [
+      "melyik előlegfolyamat",
+      "fel nem használt előleg",
+      "KAP megrendelés",
+      "előleg visszafizetés",
+      "előleg felhasználás"
+    ],
+    "notes": "A teljes korpuszban több előleg- és megrendeléskezelési folyamat létezik. A helyes célchunk az eredeti kérdéssel csak a 13. helyen jelent meg, 0.6306 similarity értékkel."
+  }
+  ]
+}

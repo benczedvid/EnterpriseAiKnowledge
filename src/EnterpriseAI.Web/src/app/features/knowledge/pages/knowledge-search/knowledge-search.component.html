@@ -1,0 +1,137 @@
+<section class="knowledge-page">
+  <header class="page-header">
+    <p class="eyebrow">Enterprise AI Knowledge</p>
+    <h1>Vállalati tudáskereső</h1>
+    <p>
+      Tegyél fel kérdést az indexelt SharePoint-dokumentumok
+      tartalma alapján.
+    </p>
+  </header>
+
+  <form
+    class="question-card"
+    (ngSubmit)="ask()">
+
+    <label for="question">
+      Kérdés
+    </label>
+
+    <textarea
+      id="question"
+      name="question"
+      [(ngModel)]="question"
+      rows="4"
+      maxlength="2000"
+      placeholder="Például: Milyen adatokat kell megadni a kapujegy kérelemben?"
+      required>
+    </textarea>
+
+    <div class="form-footer">
+
+      <button
+        type="submit"
+        [disabled]="isLoading()">
+        @if (isLoading()) {
+          Válasz készítése...
+        } @else {
+          Kérdezés
+        }
+      </button>
+    </div>
+  </form>
+
+  @if (errorMessage()) {
+    <div class="message message-error" role="alert">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <section class="answer-card loading-card">
+      <div class="loading-indicator"></div>
+
+      <div>
+        <strong>Válasz készítése</strong>
+        <p>
+          Szemantikai keresés és forrásalapú válaszgenerálás
+          folyamatban.
+        </p>
+      </div>
+    </section>
+  }
+
+  @if (result(); as currentResult) {
+    <section class="answer-card">
+      <div class="answer-header">
+        <span
+          class="answer-status"
+          [class.no-answer]="
+            !currentResult.answeredFromKnowledgeBase
+          ">
+          @if (currentResult.answeredFromKnowledgeBase) {
+            Válasz a tudásbázisból
+          } @else {
+            Nincs megbízható forrás
+          }
+        </span>
+      </div>
+
+      <div class="answer-content">
+        {{ currentResult.answer }}
+      </div>
+    </section>
+
+    @if (currentResult.sources.length > 0) {
+      <section class="sources-section">
+        <div class="section-header">
+          <h2>Felhasznált források</h2>
+          <span>
+            {{ currentResult.sources.length }} találat
+          </span>
+        </div>
+
+        <div class="source-grid">
+          @for (
+            source of currentResult.sources;
+            track trackSource($index, source);
+            let sourceNumber = $index
+          ) {
+            <a
+              class="source-card"
+              [href]="source.sourceUrl"
+              target="_blank"
+              rel="noopener noreferrer">
+
+              <div class="source-number">
+                {{ sourceNumber + 1 }}
+              </div>
+
+              <div class="source-content">
+                <strong>{{ source.documentTitle }}</strong>
+
+                @if (source.sectionTitle) {
+                  <span>
+                    {{ source.sectionTitle }}
+                  </span>
+                }
+
+                @if (source.pageNumber) {
+                  <span>
+                    {{ source.pageNumber }}. oldal
+                  </span>
+                }
+
+                <div class="similarity">
+                  <span>Relevancia</span>
+                  <strong>
+                    {{ similarityPercent(source) }}%
+                  </strong>
+                </div>
+              </div>
+            </a>
+          }
+        </div>
+      </section>
+    }
+  }
+</section>

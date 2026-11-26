@@ -1,0 +1,34 @@
+{
+  "documentKey": "gate-pass",
+  "sourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
+  "fileName": "201308 Kapujegy nyomtatvány minta.pdf",
+  "format": "pdf",
+  "datasetVersion": "1.0",
+  "expectedChunkCount": {
+    "minimum": 2,
+    "maximum": 3
+  },
+  "requiredExtractedTerms": [
+    "eszköz"
+  ],
+  "desiredExtractedTerms": [
+    "gyártó",
+    "típus",
+    "gyártási szám",
+    "azonosító"
+  ],
+  "forbiddenExtractedTerms": [],
+  "knownIssues": [
+    {
+      "id": "gate-pass-pdf-fields-001",
+      "description": "A PDF-parser nem nyeri ki a részletes eszközmezők feliratait.",
+      "missingTerms": [
+        "gyártó",
+        "típus",
+        "gyártási szám",
+        "azonosító"
+      ],
+      "severity": "medium"
+    }
+  ]
+}

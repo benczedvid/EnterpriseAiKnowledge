@@ -1,0 +1,189 @@
+{
+  "documentKey": "stock-clearance-close",
+  "sourceId": "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE",
+  "fileName": "2017. évi 13. sz. ügyviteli utasítás - Készletkisöprési aktivitás zárása.docx",
+  "format": "docx",
+  "datasetVersion": "1.0",
+  "cases": [
+    {
+      "id": "stock-clearance-close-001",
+      "question": "Mi a teendő a megmaradt készletekkel a készletkisöprés lezárásakor?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "megmaradt készletek",
+        "összekészítés"
+      ],
+      "requiredAnswerFacts": [
+        "A megmaradt készleteket össze kell készíteni.",
+        "A készleteket a dokumentumban meghatározott módon kell kezelni."
+      ],
+      "forbiddenAnswerClaims": [
+        "A megmaradt készleteket automatikusan meg kell semmisíteni.",
+        "A készleteket dokumentálás nélkül kell kidobni."
+      ],
+      "expectedTopK": 1,
+      "minimumSimilarity": 0.68,
+      "notes": "Korábbi manuális Top-1 similarity: körülbelül 0.7179.",
+      "baseline": {
+        "rank": 1,
+        "similarity": 0.7179154311,
+        "chunkIndex": 1
+      }
+    },
+    {
+      "id": "stock-clearance-close-002",
+      "question": "Hogyan kell összekészíteni és tárolni a készletkisöprés után megmaradt termékeket?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "raklap",
+        "árupróba lista",
+        "áruátvétel"
+      ],
+      "requiredAnswerFacts": [
+        "A termékeket raklapra kell összekészíteni.",
+        "A raklaphoz árupróba-listát kell készíteni.",
+        "A termékeket az áruátvételen kell tárolni."
+      ],
+      "forbiddenAnswerClaims": [
+        "A termékeket azonnal vissza kell küldeni a beszállítónak."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.55,
+      "notes": "A fizikai összekészítés és tárolás lépéseit méri.",
+      "baseline": null
+    },
+    {
+      "id": "stock-clearance-close-003",
+      "question": "Mi képezi a készletkisöprés könyvelésének alapbizonylatát?",
+      "category": "fact",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "árupróba listák",
+        "alapbizonylat"
+      ],
+      "requiredAnswerFacts": [
+        "A könyvelés alapbizonylatát az árupróba-listák másolatai képezik."
+      ],
+      "forbiddenAnswerClaims": [
+        "A kapujegy képezi a könyvelés alapbizonylatát."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "Pontos üzleti bizonylat visszakeresése.",
+      "baseline": null
+    },
+    {
+      "id": "stock-clearance-close-004",
+      "question": "Milyen okkal kell könyvelni a készletkisöprés során leírt készleteket?",
+      "category": "fact",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "forgalomból történő kivonás",
+        "leírás oka"
+      ],
+      "requiredAnswerFacts": [
+        "A leírás okaként a forgalomból történő kivonást kell megadni."
+      ],
+      "forbiddenAnswerClaims": [
+        "A leírás oka lopás.",
+        "A leírás oka természetes fogyás."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "Egzakt könyvelési megnevezést mér.",
+      "baseline": null
+    },
+    {
+      "id": "stock-clearance-close-005",
+      "question": "Kit és hogyan kell értesíteni a készletkisöprés könyvelésének megtörténtéről?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "Készletgazdálkodási vezető",
+        "e-mail"
+      ],
+      "requiredAnswerFacts": [
+        "A Készletgazdálkodási vezetőt kell értesíteni.",
+        "Az értesítést e-mailben kell megtenni."
+      ],
+      "forbiddenAnswerClaims": [
+        "Csak szóban kell értesíteni az áruházvezetőt."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.48,
+      "notes": "A felelős és az értesítés módjának együttes visszakeresése.",
+      "baseline": null
+    },
+    {
+      "id": "stock-clearance-close-006",
+      "question": "Mikor állítja át a Beszerzés a készletkisöprésben érintett termékek státuszát?",
+      "category": "deadline",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "Beszerzés",
+        "2017.11.10"
+      ],
+      "requiredAnswerFacts": [
+        "A Beszerzés 2017.11.10-én állítja át a termékek státuszát."
+      ],
+      "forbiddenAnswerClaims": [
+        "A státuszátállítás dátuma 2013.03.22."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": 0.45,
+      "notes": "Egzakt dátum visszakeresése a dokumentum végéről.",
+      "baseline": null
+    },
+    {
+      "id": "stock-clearance-close-007",
+      "question": "Mennyi pénzbírság jár a készletkisöprés hibás lezárásáért?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [],
+      "requiredAnswerFacts": [],
+      "forbiddenAnswerClaims": [
+        "Konkrét pénzbírság",
+        "A dokumentum meghatároz pénzügyi szankciót."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": null,
+      "notes": "A dokumentum nem határoz meg pénzbírságot.",
+      "baseline": null
+    }
+  ]
+}

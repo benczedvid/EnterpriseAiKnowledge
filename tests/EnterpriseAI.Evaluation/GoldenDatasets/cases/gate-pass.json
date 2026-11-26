@@ -1,0 +1,160 @@
+{
+  "documentKey": "gate-pass",
+  "sourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
+  "fileName": "201308 Kapujegy nyomtatvány minta.pdf",
+  "format": "pdf",
+  "datasetVersion": "1.0",
+  "cases": [
+    {
+      "id": "gate-pass-001",
+      "question": "Milyen adatokat kell megadni a kapujegy kérelemben?",
+      "category": "fact-list",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+      ],
+      "expectedDocumentTitleContains": "Kapujegy",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "Dolgozószám",
+        "Anyja neve",
+        "Állandó lakcíme"
+      ],
+      "requiredAnswerFacts": [
+        "Meg kell adni a kérelmező nevét.",
+        "Meg kell adni a dolgozószámot.",
+        "Meg kell adni az anyja nevét.",
+        "Meg kell adni az állandó lakcímet.",
+        "Fel kell sorolni a használni kívánt eszközöket."
+      ],
+      "forbiddenAnswerClaims": [
+        "A kérelemhez bankszámlaszám szükséges.",
+        "A kérelemhez adószám szükséges."
+      ],
+      "expectedTopK": 1,
+      "minimumSimilarity": 0.58,
+      "notes": "A korábbi manuális baseline top-1 similarity értéke körülbelül 0.6157.",
+      "baseline": {
+        "rank": 1,
+        "similarity": 0.6156794244,
+        "chunkIndex": 0
+      }
+    },
+    {
+    "id": "gate-pass-002",
+    "question": "Milyen eszközöket kell felsorolni a kapujegy kérelmen?",
+    "category": "fact-list",
+    "shouldAnswer": true,
+    "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+    ],
+    "expectedDocumentTitleContains": "Kapujegy",
+    "expectedSectionTitleContains": null,
+    "requiredContentTerms": [
+        "eszköz"
+    ],
+    "requiredAnswerFacts": [
+        "A kapujegy kérelmen fel kell sorolni a használni kívánt eszközöket."
+    ],
+    "forbiddenAnswerClaims": [
+        "A dokumentum minden eszközhöz kötelezően tartalmazza a gyártót.",
+        "A dokumentum minden eszközhöz kötelezően tartalmazza a típust.",
+        "A dokumentum minden eszközhöz kötelezően tartalmazza a gyártási számot."
+    ],
+    "expectedTopK": 3,
+    "minimumSimilarity": 0.55,
+    "notes": "Retrievalteszt a PDF-parser által ténylegesen kinyert eszközszövegre. A részletes eszközmezők kinyerése külön parser-regressziós eset.",
+    "baseline": null
+    },
+    {
+      "id": "gate-pass-003",
+      "question": "Ki engedélyezi a kapujegyen felsorolt eszközök kiadását?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+      ],
+      "expectedDocumentTitleContains": "Kapujegy",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "Áruházvezető",
+        "engedélyezem"
+      ],
+      "requiredAnswerFacts": [
+        "Az eszközök kiadását az áruházvezető engedélyezi."
+      ],
+      "forbiddenAnswerClaims": [
+        "Az eszközök kiadását a biztonsági szolgálat engedélyezi."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.45,
+      "notes": "A biztonsági szolgálat ellenőrzési, nem engedélyezési szerepet kap.",
+      "baseline": null
+    },
+    {
+      "id": "gate-pass-004",
+      "question": "Ki ellenőrzi a kapujegyes eszköz kiszállítását és visszaérkezését?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+      ],
+      "expectedDocumentTitleContains": "Kapujegy",
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [
+        "Biztonsági szolgálat",
+        "kiszállítását",
+        "visszaérkezett"
+      ],
+      "requiredAnswerFacts": [
+        "A kiszállítást a biztonsági szolgálat ellenőrzi.",
+        "A visszaérkezést a biztonsági szolgálat ellenőrzi."
+      ],
+      "forbiddenAnswerClaims": [
+        "Az ellenőrzést az áruházvezető végzi."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.45,
+      "notes": "Várhatóan a második chunkban található.",
+      "baseline": null
+    },
+    {
+      "id": "gate-pass-005",
+      "question": "Milyen konkrét dátumig kell visszaszolgáltatni a kapujegyen szereplő eszközt?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [],
+      "requiredAnswerFacts": [],
+      "forbiddenAnswerClaims": [
+        "Konkrét visszaszolgáltatási dátum",
+        "A dokumentum előre kitöltött határidőt tartalmaz."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": null,
+      "notes": "A nyomtatvány üresen kitöltendő határidőmezőt tartalmaz, ezért konkrét dátum nem állapítható meg.",
+      "baseline": null
+    },
+    {
+      "id": "gate-pass-006",
+      "question": "Mennyi kauciót kell fizetni a kapujegyhez?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [],
+      "requiredAnswerFacts": [],
+      "forbiddenAnswerClaims": [
+        "Konkrét kaucióösszeg",
+        "A kapujegyhez kötelező kauciót fizetni."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": null,
+      "notes": "A dokumentum nem határoz meg kauciót.",
+      "baseline": null
+    }
+  ]
+}

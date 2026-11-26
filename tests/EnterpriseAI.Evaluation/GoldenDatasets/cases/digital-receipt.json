@@ -1,0 +1,341 @@
+{
+  "documentKey": "digital-receipt",
+  "sourceId": "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2",
+  "fileName": "Digitális nyugta keresése és nyomtatása RHL.xlsx",
+  "format": "xlsx",
+  "datasetVersion": "1.0",
+  "cases": [
+    {
+      "id": "digital-receipt-001",
+      "question": "Hol lehet megkeresni és kinyomtatni a digitális nyugtákat?",
+      "category": "fact",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Általános leírás",
+      "requiredContentTerms": [
+        "Webadmin",
+        "Digitális nyugták",
+        "nyugta másolatok"
+      ],
+      "requiredAnswerFacts": [
+      "A digitális nyugták a Webadmin felületen kereshetők meg.",
+      "A Webadminban a Webáruház menüpontot kell megnyitni.",
+      "A Webáruház alatt a Digitális nyugták menüpontra kell kattintani."
+      ],
+      "forbiddenAnswerClaims": [
+      "eredeti nyugtának minősül",
+      "kizárólag az SAP-ban",
+      "Nyugták fül"
+    ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "Az általános leírás és a rendszer céljának visszakeresését ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-002",
+      "question": "Hogyan lehet megnyitni a Webadmin felületet digitális nyugta kereséséhez?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Nyisd meg a Webadmin felületet",
+      "requiredContentTerms": [
+        "www.webadmin.praktiker.hu",
+        "Google Chrome",
+        "store.praktiker.hu"
+      ],
+      "requiredAnswerFacts": [
+        "A Webadmin felület a www.webadmin.praktiker.hu címen nyitható meg.",
+        "A felület Google Chrome böngészőből használható.",
+        "A Webadmin az áruházi programok felületéről is megnyitható a megfelelő csempével."
+      ],
+      "forbiddenAnswerClaims": [
+        "A Webadmin kizárólag SAP GUI-ból érhető el.",
+        "A nyugtakereséshez Internet Explorer szükséges."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "Az első végrehajtási lépést és a hozzáférési útvonalakat ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-003",
+      "question": "Milyen adatokkal kell belépni a Webadmin felületre?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Lépj be a saját fiókoddal",
+      "requiredContentTerms": [
+        "email címed",
+        "jelszavad"
+      ],
+      "requiredAnswerFacts": [
+        "A Webadmin használatához a saját fiókkal kell belépni.",
+        "Meg kell adni a Webadminhoz kapott e-mail-címet.",
+        "Meg kell adni a fiók jelszavát."
+      ],
+      "forbiddenAnswerClaims": [
+        "A belépéshez törzsvásárlói kártyaszám szükséges.",
+        "A Webadmin jelszó nélkül használható."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.45,
+      "notes": "A második végrehajtási lépés visszakeresését ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-004",
+      "question": "Melyik menüpontokon keresztül érhető el a digitális nyugták listája a Webadminban?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Digitális nyugták menüpontot",
+      "requiredContentTerms": [
+        "webáruház menüpont",
+        "Digitális nyugták",
+        "nyugtákat"
+      ],
+      "requiredAnswerFacts": [
+        "Először a Webáruház menüpontot kell megnyitni.",
+        "A Webáruház menüpont alatt a Digitális nyugták menüpontra kell kattintani.",
+        "A nyugták a Digitális nyugták menüpontban találhatók."
+      ],
+      "forbiddenAnswerClaims": [
+        "A nyugták a Pénzügy menüpontban találhatók.",
+        "A digitális nyugták eléréséhez az SAP-ba kell belépni."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "A harmadik és negyedik lépésből álló navigációs folyamatot ellenőrzi. A helyes válaszhoz a 4. lépésnek Top 3-ban kell szerepelnie.",
+      "baseline": null
+    },
+    {
+    "id": "digital-receipt-005",
+    "question": "A Webadmin digitális nyugtakeresőjében milyen szűrési feltételekkel lehet megtalálni egy vásárlási bizonylatot?",
+    "category": "fact-list",
+    "shouldAnswer": true,
+    "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+    ],
+    "expectedDocumentTitleContains": "Digitális nyugta",
+    "expectedSectionTitleContains": "szűrési feltételek",
+    "requiredContentTerms": [
+        "kártyaszám",
+        "időszak",
+        "Áruházat",
+        "Tranzakció szám",
+        "Megrendelő neve"
+    ],
+    "requiredAnswerFacts": [
+        "Lehet keresni törzsvásárlói vagy dolgozói kártyaszám alapján.",
+        "Beállítható a keresett időszak.",
+        "Kiválasztható a vásárlás áruháza.",
+        "Lehet keresni tranzakciószám alapján.",
+        "Lehet keresni a megrendelő neve alapján."
+    ],
+    "forbiddenAnswerClaims": [
+        "A keresés kizárólag a vásárló neve alapján végezhető.",
+        "Az áruház nem adható meg keresési feltételként."
+    ],
+    "expectedTopK": 3,
+    "minimumSimilarity": 0.64,
+    "notes": "A szűrési feltételeket tartalmazó ötödik lépésnek Top 3-ban kell szerepelnie. A kézi baseline során a helyes szakasz a 2. helyen jelent meg 0,6859 similarity értékkel.",
+    "baseline": {
+        "rank": 2,
+        "similarity": 0.6859,
+        "chunkIndex": 5
+    }
+    },
+    {
+      "id": "digital-receipt-006",
+      "question": "Hogyan lehet több tranzakciószámra egyszerre rákeresni a digitális nyugták között?",
+      "category": "exact-instruction",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "szűrési feltételek",
+      "requiredContentTerms": [
+        "több azonosítót",
+        "vesszővel",
+        "szóköz nélkül"
+      ],
+      "requiredAnswerFacts": [
+        "Több tranzakcióazonosítót vesszővel kell elválasztani.",
+        "A vesszők után nem szabad szóközt írni."
+      ],
+      "forbiddenAnswerClaims": [
+        "A tranzakciószámokat pontosvesszővel kell elválasztani.",
+        "Minden tranzakciószámot külön keresésben kell megadni."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "Pontos formázási szabály visszakeresését ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-007",
+      "question": "Hogyan lehet megtekinteni, letölteni és kinyomtatni a megtalált digitális nyugtát?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Nyomtasd ki a nyugtát",
+      "requiredContentTerms": [
+        "Bizonylatképként",
+        "lista ikonra",
+        "letöltés ikonra",
+        "Pdf formátumban",
+        "nyomtató ikonra"
+      ],
+      "requiredAnswerFacts": [
+        "A keresési eredmény a lista ikonnal bizonylatképként tekinthető meg.",
+        "A letöltés ikon a nyugtát PDF-formátumban nyitja meg.",
+        "A nyugta a nyomtató ikonnal nyomtatható ki."
+      ],
+      "forbiddenAnswerClaims": [
+        "A digitális nyugta kizárólag e-mailben kérhető.",
+        "A nyugtát Word-formátumban kell letölteni."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.55,
+      "notes": "A hatodik végrehajtási lépést és a három művelet sorrendjét ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-008",
+      "question": "Kik használhatják a digitális nyugták keresését és nyomtatását?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Általános leírás",
+      "requiredContentTerms": [
+        "Végrehajtó",
+        "Információs",
+        "Kasszafelügyelő",
+        "Áruátvételi adminisztrátor"
+      ],
+      "requiredAnswerFacts": [
+        "A folyamatot információs munkatárs használhatja.",
+        "A folyamatot kasszafelügyelő használhatja.",
+        "A folyamatot áruátvételi adminisztrátor használhatja."
+      ],
+      "forbiddenAnswerClaims": [
+        "A folyamat kizárólag áruházvezetők számára használható."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.45,
+      "notes": "A dokumentum fejlécében tárolt végrehajtói szerepköröket ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-009",
+      "question": "Mely vásárlók digitális nyugtái kereshetők meg a Webadminban?",
+      "category": "eligibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Általános leírás",
+      "requiredContentTerms": [
+        "törzsvásárlói kártyával",
+        "webshop",
+        "regisztráltak"
+      ],
+      "requiredAnswerFacts": [
+        "Megkereshetők a törzsvásárlói kártyával rendelkező vásárlók nyugtái.",
+        "Megkereshetők a webshop felületén regisztrált vásárlók nyugtái."
+      ],
+      "forbiddenAnswerClaims": [
+        "Minden névtelen vásárló nyugtája megkereshető személyes azonosítás nélkül."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "A digitális nyugta kereshetőségének feltételeit ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-010",
+      "question": "Eredeti nyugtának számít a Webadminból kinyomtatott digitális nyugta?",
+      "category": "fact",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUJ5XERPC4XII5B2ZNCRZTMRVXM2"
+      ],
+      "expectedDocumentTitleContains": "Digitális nyugta",
+      "expectedSectionTitleContains": "Általános leírás",
+      "requiredContentTerms": [
+        "csak",
+        "NYUGTA MÁSOLATOK"
+      ],
+      "requiredAnswerFacts": [
+        "A Webadmin felületén látható bizonylatok csak nyugtamásolatok.",
+        "A kinyomtatott dokumentum nem eredeti nyugta."
+      ],
+      "forbiddenAnswerClaims": [
+        "A Webadminból kinyomtatott nyugta eredeti nyugtának minősül."
+      ],
+      "expectedTopK": 1,
+      "minimumSimilarity": 0.55,
+      "notes": "A dokumentum fontos korlátozását ellenőrzi.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-011",
+      "question": "Mennyi ideig őrzi meg a Webadmin a digitális nyugtákat?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [],
+      "requiredAnswerFacts": [],
+      "forbiddenAnswerClaims": [
+        "Konkrét megőrzési idő",
+        "A dokumentum meghatározza a digitális nyugták megőrzési idejét."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": null,
+      "notes": "A dokumentum nem tartalmaz megőrzési időt.",
+      "baseline": null
+    },
+    {
+      "id": "digital-receipt-012",
+      "question": "Milyen díjat kell fizetni a digitális nyugta kinyomtatásáért?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [],
+      "requiredAnswerFacts": [],
+      "forbiddenAnswerClaims": [
+        "Konkrét nyomtatási díj",
+        "A dokumentum nyomtatási díjat határoz meg."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": null,
+      "notes": "A dokumentum nem határoz meg nyomtatási díjat.",
+      "baseline": null
+    }
+  ]
+}

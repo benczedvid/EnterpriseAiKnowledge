@@ -1,0 +1,300 @@
+{
+  "documentKey": "unused-cash-advance",
+  "sourceId": "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR",
+  "fileName": "Fel nem használt előleg kezelése a kasszarendszerben RHL.xlsx",
+  "format": "xlsx",
+  "datasetVersion": "1.0",
+  "cases": [
+    {
+    "id": "unused-cash-advance-001",
+    "question": "Mit kell tenni a hat hónapnál régebbi nyitott előlegekkel?",
+    "category": "procedure",
+    "shouldAnswer": true,
+    "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+    ],
+    "expectedDocumentTitleContains": "Fel nem használt előleg",
+    "expectedSectionTitleContains": "Ellenőrizd a nyilvántartásban",
+    "requiredContentTerms": [
+        "6 hónapnál régebbi",
+        "nyitott előleg",
+        "SAP"
+    ],
+    "requiredAnswerFacts": [
+        "Ellenőrizni kell, van-e hat hónapnál régebbi nyitott előleg.",
+        "A nyitott előlegek listája az SAP-ból kérhető le."
+    ],
+    "forbiddenAnswerClaims": [
+        "Az előleg automatikusan törlődik.",
+        "Az előleg automatikusan visszafizetésre kerül."
+    ],
+    "expectedTopK": 1,
+    "minimumSimilarity": 0.64,
+    "baseline": {
+        "rank": 1,
+        "similarity": 0.6773,
+        "chunkIndex": 1
+    }
+    },
+    {
+    "id": "unused-cash-advance-002",
+    "question": "A fel nem használt készpénzes előleg kezelésekor mit kell ellenőrizni a megrendelésen szereplő termékkel kapcsolatban, mielőtt felvesszük a kapcsolatot a vásárlóval?",
+    "category": "procedure",
+    "shouldAnswer": true,
+    "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+    ],
+    "expectedDocumentTitleContains": "Fel nem használt előleg",
+    "expectedSectionTitleContains": "termék meglétét",
+    "requiredContentTerms": [
+        "megrendelésen szereplő termék",
+        "áruátvétellel",
+        "osztályos kollégával"
+    ],
+    "requiredAnswerFacts": [
+        "Ellenőrizni kell a megrendelésen szereplő termék meglétét.",
+        "Az ellenőrzéshez az áruátvétellel vagy az osztályos kollégával kell egyeztetni."
+    ],
+    "forbiddenAnswerClaims": [
+        "A terméket azonnal selejtezni kell."
+    ],
+    "expectedTopK": 1,
+    "minimumSimilarity": 0.71,
+    "baseline": {
+        "rank": 1,
+        "similarity": 0.7558,
+        "chunkIndex": 2
+    }
+    },
+    {
+      "id": "unused-cash-advance-003",
+      "question": "Mit kell egyeztetni a vásárlóval a nyitott előleg kezelésekor?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+      ],
+      "expectedDocumentTitleContains": "Fel nem használt előleg",
+      "expectedSectionTitleContains": "Vedd fel a kapcsolatot a vásárlóval",
+      "requiredContentTerms": [
+        "igényt tart-e",
+        "megrendelt termékre",
+        "befizetett előlegre",
+        "többször"
+      ],
+      "requiredAnswerFacts": [
+        "Egyeztetni kell a vásárlóval, hogy igényt tart-e a megrendelt termékre.",
+        "Egyeztetni kell, hogy a vásárló igényt tart-e a befizetett előlegre.",
+        "Ha a vásárló elsőre nem érhető el, többször is meg kell próbálni kapcsolatba lépni vele.",
+        "Az ügyintézés eredményét fel kell vezetni a megrendelés lefűzött példányára."
+      ],
+      "forbiddenAnswerClaims": [
+        "Egyetlen sikertelen kapcsolatfelvétel után azonnal meg kell szüntetni a megrendelést.",
+        "A vásárló megkeresése nem szükséges."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.55,
+      "notes": "A harmadik lépés és a vásárlóval történő kapcsolatfelvétel szabályainak visszakeresését ellenőrzi."
+    },
+    {
+    "id": "unused-cash-advance-004",
+    "question": "A fel nem használt készpénzes előleg kezelésekor mi a teendő a megrendeléssel, ha a vásárlót többszöri próbálkozás után sem lehet elérni?",
+    "category": "procedure",
+    "shouldAnswer": true,
+    "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+    ],
+    "expectedDocumentTitleContains": "Fel nem használt előleg",
+    "expectedSectionTitleContains": "megrendelés megszüntetése",
+    "requiredContentTerms": [
+        "többszöri próbálkozás",
+        "vonalkód",
+        "megrendelés megszüntetése"
+    ],
+    "requiredAnswerFacts": [
+        "Többször meg kell próbálni kapcsolatba lépni a vásárlóval.",
+        "Sikertelen kapcsolatfelvétel esetén a megrendelést meg kell szüntetni.",
+        "A megrendelés vonalkódját be kell olvasni.",
+        "A megrendelés megszüntetése funkciót kell használni."
+    ],
+    "forbiddenAnswerClaims": [
+        "A vásárló előlegét automatikusan át kell utalni."
+    ],
+    "expectedTopK": 3,
+    "minimumSimilarity": 0.67,
+    "baseline": {
+        "rank": 2,
+        "similarity": 0.7091,
+        "chunkIndex": 4
+    }
+    },
+    {
+    "id": "unused-cash-advance-005",
+    "question": "Hogyan kell rendezni a bizonylatokat a megrendelés megszüntetése után?",
+    "category": "procedure",
+    "shouldAnswer": true,
+    "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+    ],
+    "expectedDocumentTitleContains": "Fel nem használt előleg",
+    "expectedSectionTitleContains": "Rendezd a bizonylatokat",
+    "requiredContentTerms": [
+        "be- és kifizetés bizonylatokat",
+        "sztornó számlával",
+        "megrendelés visszavonása",
+        "fűzd le"
+    ],
+    "requiredAnswerFacts": [
+        "A be- és kifizetési bizonylatokat alá kell írni.",
+        "A bizonylatokat össze kell tűzni a sztornó számlával.",
+        "Csatolni kell a megrendelés visszavonása bizonylatot.",
+        "A dokumentumokat az erre létrehozott mappába kell lefűzni."
+    ],
+    "forbiddenAnswerClaims": [
+        "A bizonylatokat meg kell semmisíteni."
+    ],
+    "expectedTopK": 3,
+    "minimumSimilarity": 0.61,
+    "baseline": {
+        "rank": 2,
+        "similarity": 0.6465,
+        "chunkIndex": 5
+    }
+    },
+    {
+    "id": "unused-cash-advance-006",
+    "question": "A fel nem használt készpénzes előleg kezelésekor mi legyen a megrendelésben szereplő termékkel a megrendelés megszüntetése után?",
+    "category": "procedure",
+    "shouldAnswer": true,
+    "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+    ],
+    "expectedDocumentTitleContains": "Fel nem használt előleg",
+    "expectedSectionTitleContains": "Gondoskodj a megrendelésben szereplő termékről",
+    "requiredContentTerms": [
+        "megrendelésben szereplő termék",
+        "vissza",
+        "osztályra"
+    ],
+    "requiredAnswerFacts": [
+        "A megrendelésben szereplő terméket vissza kell vitetni az osztályra."
+    ],
+    "forbiddenAnswerClaims": [
+        "A terméket automatikusan selejtezni kell.",
+        "A terméket a vásárlónak ki kell szállítani."
+    ],
+    "expectedTopK": 3,
+    "minimumSimilarity": 0.5,
+    "notes": "A hatodik végrehajtási lépés visszakeresését ellenőrzi, egyértelmű üzleti kontextussal.",
+    "baseline": null
+    },
+    {
+      "id": "unused-cash-advance-007",
+      "question": "Ki hajtja végre a fel nem használt készpénzes előlegek kezelését?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+      ],
+      "expectedDocumentTitleContains": "Fel nem használt előleg",
+      "expectedSectionTitleContains": "Általános leírás",
+      "requiredContentTerms": [
+        "Végrehajtó",
+        "Kasszafelügyelő"
+      ],
+      "requiredAnswerFacts": [
+        "A folyamat végrehajtója a kasszafelügyelő."
+      ],
+      "forbiddenAnswerClaims": [
+        "A folyamat végrehajtója a pénztáros.",
+        "A folyamat végrehajtója az áruházvezető."
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.5,
+      "notes": "A dokumentum fejlécében található szerepkör-metaadat visszakeresését ellenőrzi."
+    },
+    {
+      "id": "unused-cash-advance-008",
+      "question": "Ki készítette a fel nem használt készpénzes előlegek kezeléséről szóló leírást?",
+      "category": "metadata-author",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+      ],
+      "expectedDocumentTitleContains": "Fel nem használt előleg",
+      "expectedSectionTitleContains": "Általános leírás",
+      "requiredContentTerms": [
+        "Készítette",
+        "Marosi Renáta"
+      ],
+      "requiredAnswerFacts": [
+        "A dokumentumot Marosi Renáta készítette."
+      ],
+      "forbiddenAnswerClaims": [],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.45,
+      "notes": "A dokumentum készítőjének metaadatát ellenőrzi."
+    },
+    {
+      "id": "unused-cash-advance-009",
+      "question": "Mikor frissítették a fel nem használt készpénzes előlegek kezeléséről szóló leírást?",
+      "category": "metadata-date",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULLZPWOU3Z35RHZ37JIXHNUNQUR"
+      ],
+      "expectedDocumentTitleContains": "Fel nem használt előleg",
+      "expectedSectionTitleContains": "Általános leírás",
+      "requiredContentTerms": [
+        "Frissítés dátuma",
+        "2026.08.12"
+      ],
+      "requiredAnswerFacts": [
+        "A dokumentum frissítésének dátuma 2026.08.12."
+      ],
+      "forbiddenAnswerClaims": [
+        "46246"
+      ],
+      "expectedTopK": 3,
+      "minimumSimilarity": 0.45,
+      "notes": "Regressziós teszt az Excel-sorozatszámként tárolt dátum átalakításához."
+    },
+    {
+      "id": "unused-cash-advance-010",
+      "question": "Mennyi kamatot kell fizetni a hat hónapnál régebbi előleg után?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [],
+      "requiredAnswerFacts": [],
+      "forbiddenAnswerClaims": [
+        "Konkrét kamatláb",
+        "Konkrét kamatösszeg",
+        "A dokumentum meghatározza a fizetendő kamatot."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": null,
+      "notes": "A dokumentum nem határoz meg kamatot vagy kamatlábat."
+    },
+    {
+      "id": "unused-cash-advance-011",
+      "question": "Milyen bankszámlaszámra kell visszautalni a fel nem használt előleget?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "expectedSectionTitleContains": null,
+      "requiredContentTerms": [],
+      "requiredAnswerFacts": [],
+      "forbiddenAnswerClaims": [
+        "Konkrét bankszámlaszám",
+        "A dokumentum előírja az előleg banki átutalását."
+      ],
+      "expectedTopK": 5,
+      "minimumSimilarity": null,
+      "notes": "A dokumentumban nincs bankszámlaszám és nincs meghatározva banki visszautalás."
+    }
+  ]
+}

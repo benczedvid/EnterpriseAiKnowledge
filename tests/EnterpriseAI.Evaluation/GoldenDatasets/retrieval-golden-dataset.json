@@ -1,0 +1,295 @@
+{
+  "version": "1.0",
+  "createdAt": "2026-11-22",
+  "description": "Initial retrieval evaluation dataset for the Enterprise AI Knowledge SharePoint corpus.",
+  "cases": [
+    {
+      "id": "kapujegy-001",
+      "question": "Milyen adatokat kell megadni a kapujegy kérelemben?",
+      "category": "fact-list",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+      ],
+      "expectedDocumentTitleContains": "Kapujegy",
+      "requiredContentTerms": [
+        "Dolgozószám",
+        "Anyja neve",
+        "Állandó lakcíme"
+      ],
+      "forbiddenContentTerms": [
+        "Készletkisöprés"
+      ],
+      "minimumSimilarity": 0.60,
+      "expectedTopK": 1,
+      "notes": "Previously measured top-1 similarity: approximately 0.616 after metadata enrichment."
+    },
+    {
+      "id": "kapujegy-002",
+      "question": "Meddig kell vállalni a kapujegyen szereplő eszközök visszaszolgáltatását?",
+      "category": "fact",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+      ],
+      "expectedDocumentTitleContains": "Kapujegy",
+      "requiredContentTerms": [
+        "visszaszolgáltatását",
+        "vállalom"
+      ],
+      "forbiddenContentTerms": [
+        "Készletváltozások"
+      ],
+      "minimumSimilarity": 0.50,
+      "expectedTopK": 3,
+      "notes": "The form contains an empty date field, so the answer must not invent a concrete deadline."
+    },
+    {
+      "id": "kapujegy-003",
+      "question": "Ki engedélyezi az eszközök kiadását a kapujegy alapján?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+      ],
+      "expectedDocumentTitleContains": "Kapujegy",
+      "requiredContentTerms": [
+        "Áruházvezető",
+        "engedélyezem"
+      ],
+      "forbiddenContentTerms": [
+        "Beszerzés"
+      ],
+      "minimumSimilarity": 0.50,
+      "expectedTopK": 3,
+      "notes": "The relevant text may occur close to the overlap between chunk 0 and chunk 1."
+    },
+    {
+      "id": "kapujegy-004",
+      "question": "Ki ellenőrzi az eszköz kiszállítását és visszaérkezését?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+      ],
+      "expectedDocumentTitleContains": "Kapujegy",
+      "requiredContentTerms": [
+        "Biztonsági szolgálat",
+        "kiszállítását",
+        "visszaérkezett"
+      ],
+      "forbiddenContentTerms": [
+        "Készletgazdálkodási vezető"
+      ],
+      "minimumSimilarity": 0.50,
+      "expectedTopK": 3,
+      "notes": "Expected primarily in chunk 1."
+    },
+    {
+      "id": "keszletkisopres-001",
+      "question": "Mi a teendő a megmaradt készletekkel a készletkisöprés lezárásakor?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "requiredContentTerms": [
+        "megmaradt készletek",
+        "értékesítésre kerülnek",
+        "összekészítés"
+      ],
+      "forbiddenContentTerms": [
+        "Kapujegy"
+      ],
+      "minimumSimilarity": 0.65,
+      "expectedTopK": 1,
+      "notes": "Previously measured top-1 similarity: approximately 0.718."
+    },
+    {
+      "id": "keszletkisopres-002",
+      "question": "Hogyan kell összekészíteni és tárolni a készletkisöprés után megmaradt termékeket?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "requiredContentTerms": [
+        "raklap",
+        "árupróba lista",
+        "Biztonsági szolgálat",
+        "áruátvételen"
+      ],
+      "forbiddenContentTerms": [
+        "kiszállítását ellenőriztem"
+      ],
+      "minimumSimilarity": 0.60,
+      "expectedTopK": 3,
+      "notes": "The answer should preserve the operational sequence."
+    },
+    {
+      "id": "keszletkisopres-003",
+      "question": "Mi képezi a készletkisöprés könyvelésének alapbizonylatát?",
+      "category": "fact",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "requiredContentTerms": [
+        "árupróba listák másolata",
+        "alapbizonylat"
+      ],
+      "forbiddenContentTerms": [
+        "kapujegy"
+      ],
+      "minimumSimilarity": 0.55,
+      "expectedTopK": 3,
+      "notes": "A precise single-fact retrieval case."
+    },
+    {
+      "id": "keszletkisopres-004",
+      "question": "Milyen okkal kell rögzíteni a készletek leírását a könyvelésben?",
+      "category": "fact",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "requiredContentTerms": [
+        "forgalomból történő kivonás",
+        "leírás oka"
+      ],
+      "forbiddenContentTerms": [
+        "saját célú otthoni használat"
+      ],
+      "minimumSimilarity": 0.55,
+      "expectedTopK": 3,
+      "notes": "Tests retrieval of an exact operational phrase."
+    },
+    {
+      "id": "keszletkisopres-005",
+      "question": "Kit kell értesíteni a készletkisöprés könyvelésének megtörténtéről?",
+      "category": "responsibility",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "requiredContentTerms": [
+        "Készletgazdálkodási vezetőt",
+        "e-mailben"
+      ],
+      "forbiddenContentTerms": [
+        "Biztonsági szolgálat aláírása"
+      ],
+      "minimumSimilarity": 0.50,
+      "expectedTopK": 3,
+      "notes": "Expected toward the final document chunk."
+    },
+    {
+      "id": "keszletkisopres-006",
+      "question": "Mikor állítja át a Beszerzés a termékek státuszát?",
+      "category": "deadline",
+      "shouldAnswer": true,
+      "expectedSourceIds": [
+        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+      ],
+      "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
+      "requiredContentTerms": [
+        "Beszerzés",
+        "2017.11.10"
+      ],
+      "forbiddenContentTerms": [
+        "2013.03.22"
+      ],
+      "minimumSimilarity": 0.50,
+      "expectedTopK": 5,
+      "notes": "Tests exact date retrieval from the final chunk."
+    },
+    {
+      "id": "eloleg-xlsx-001",
+      "question": "Mit kell tenni a hat hónapnál régebbi nyitott készpénzes előlegekkel?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": "Fel nem használt készpénzes előlegek kezelése",
+      "requiredContentTerms": [
+        "6 hónapnál régebbi",
+        "SAP",
+        "nyitott előleg"
+      ],
+      "forbiddenContentTerms": [
+        "Készletkisöprés"
+      ],
+      "minimumSimilarity": 0.55,
+      "expectedTopK": 3,
+      "notes": "Fill expectedSourceIds after the representative XLSX workbook has been discovered and indexed."
+    },
+    {
+      "id": "eloleg-xlsx-002",
+      "question": "Mit kell tenni, ha a vásárlót többszöri próbálkozás után sem lehet elérni?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": "Fel nem használt készpénzes előlegek kezelése",
+      "requiredContentTerms": [
+        "megrendelés megszüntetése",
+        "vonalkód",
+        "többszöri próbálkozás"
+      ],
+      "forbiddenContentTerms": [
+        "raklap"
+      ],
+      "minimumSimilarity": 0.55,
+      "expectedTopK": 3,
+      "notes": "Expected to retrieve step 4 from the XLSX parser output."
+    },
+    {
+      "id": "eloleg-xlsx-003",
+      "question": "Hogyan kell rendezni a bizonylatokat a megrendelés megszüntetése után?",
+      "category": "procedure",
+      "shouldAnswer": true,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": "Fel nem használt készpénzes előlegek kezelése",
+      "requiredContentTerms": [
+        "be- és kifizetés bizonylatokat",
+        "sztornó számlával",
+        "fűzd le"
+      ],
+      "forbiddenContentTerms": [
+        "árupróba lista"
+      ],
+      "minimumSimilarity": 0.55,
+      "expectedTopK": 3,
+      "notes": "Expected to retrieve step 5."
+    },
+    {
+      "id": "no-answer-001",
+      "question": "Hány nap szabadság jár egy új belépő munkavállalónak?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "requiredContentTerms": [],
+      "forbiddenContentTerms": [],
+      "minimumSimilarity": null,
+      "expectedTopK": 5,
+      "notes": "No indexed document observed so far supports an answer."
+    },
+    {
+      "id": "no-answer-002",
+      "question": "Mi a vállalat 2027-es éves árbevételi terve?",
+      "category": "no-answer",
+      "shouldAnswer": false,
+      "expectedSourceIds": [],
+      "expectedDocumentTitleContains": null,
+      "requiredContentTerms": [],
+      "forbiddenContentTerms": [],
+      "minimumSimilarity": null,
+      "expectedTopK": 5,
+      "notes": "The system must not infer future financial targets."
+    }
+  ]
+}
