@@ -1,9 +1,9 @@
 {
   "documentKey": "gate-pass",
-  "sourceId": "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4",
-  "fileName": "Kapujegy nyomtatvány",
+  "sourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
+  "fileName": "201308 Kapujegy nyomtatvány minta.pdf",
   "format": "pdf",
-  "datasetVersion": "1.1",
+  "datasetVersion": "1.0",
   "cases": [
     {
       "id": "gate-pass-001",
@@ -11,7 +11,7 @@
       "category": "fact-list",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "expectedSectionTitleContains": null,
@@ -46,7 +46,7 @@
     "category": "fact-list",
     "shouldAnswer": true,
     "expectedSourceIds": [
-        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
     ],
     "expectedDocumentTitleContains": "Kapujegy",
     "expectedSectionTitleContains": null,
@@ -72,7 +72,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "expectedSectionTitleContains": null,
@@ -97,7 +97,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
+        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "expectedSectionTitleContains": null,
