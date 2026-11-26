@@ -1,1 +1,78 @@
-<router-outlet />
+<div class="flex min-h-screen flex-col">
+  <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <div class="page-container flex h-16 items-center justify-between gap-6">
+      <a
+        routerLink="/knowledge"
+        class="flex items-center gap-3 rounded-lg focus-visible:outline-3 focus-visible:outline-indigo-500/40"
+        (click)="closeMenu()">
+        <span class="grid size-9 place-items-center rounded-xl bg-indigo-600 text-sm font-bold text-white shadow-sm">
+          AI
+        </span>
+        <span class="leading-tight">
+          <span class="block text-sm font-bold text-slate-900">Enterprise AI</span>
+          <span class="block text-xs text-slate-500">Knowledge</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-1 sm:flex" aria-label="Fő navigáció">
+        @for (item of navigationItems; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="bg-indigo-50 text-indigo-700"
+            ariaCurrentWhenActive="page"
+            [title]="item.description"
+            class="rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">
+            {{ item.label }}
+          </a>
+        }
+      </nav>
+
+      <button
+        type="button"
+        class="btn-ghost sm:hidden"
+        [attr.aria-expanded]="isMenuOpen()"
+        aria-controls="mobile-navigation"
+        (click)="toggleMenu()">
+        <span class="sr-only">Menü</span>
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          @if (isMenuOpen()) {
+            <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+          } @else {
+            <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+          }
+        </svg>
+      </button>
+    </div>
+
+    @if (isMenuOpen()) {
+      <nav
+        id="mobile-navigation"
+        class="border-t border-slate-200 bg-white sm:hidden"
+        aria-label="Mobil navigáció">
+        <div class="page-container grid gap-1 py-3">
+          @for (item of navigationItems; track item.path) {
+            <a
+              [routerLink]="item.path"
+              routerLinkActive="bg-indigo-50 text-indigo-700"
+              ariaCurrentWhenActive="page"
+              class="rounded-lg px-3 py-2.5 text-slate-700 hover:bg-slate-100"
+              (click)="closeMenu()">
+              <span class="block text-sm font-semibold">{{ item.label }}</span>
+              <span class="block text-xs text-slate-500">{{ item.description }}</span>
+            </a>
+          }
+        </div>
+      </nav>
+    }
+  </header>
+
+  <main class="flex-1 py-8 sm:py-12">
+    <router-outlet />
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="page-container py-4 text-xs text-slate-500">
+      Enterprise AI Knowledge · SharePoint alapú vállalati tudásbázis
+    </div>
+  </footer>
+</div>

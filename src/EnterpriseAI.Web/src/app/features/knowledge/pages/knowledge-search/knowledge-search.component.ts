@@ -13,7 +13,6 @@ import { KnowledgeService } from '../../../../core/services/knowledge.service';
     FormsModule,
   ],
   templateUrl: './knowledge-search.component.html',
-  styleUrl: './knowledge-search.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KnowledgeSearchComponent {

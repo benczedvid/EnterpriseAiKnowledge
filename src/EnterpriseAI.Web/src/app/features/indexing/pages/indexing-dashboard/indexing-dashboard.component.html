@@ -1,8 +1,8 @@
-<section class="indexing-page">
-  <header class="page-header">
+<section class="page-container grid gap-6">
+  <header class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
     <div>
-      <p class="eyebrow">Enterprise AI Knowledge</p>
-      <h1>Indexelési dashboard</h1>
+      <p class="eyebrow">SharePoint</p>
+      <h1 class="page-title">Indexelési dashboard</h1>
       <p class="page-description">
         SharePoint dokumentumok, chunkok és indexelési futások
         áttekintése.
@@ -11,166 +11,187 @@
 
     <button
       type="button"
-      class="secondary-button"
+      class="btn-secondary self-start sm:self-auto"
       [disabled]="isLoading()"
       (click)="loadDashboard()">
+      <svg
+        class="size-4"
+        [class.animate-spin]="isLoading()"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6M20 20v-6h-6M5.6 15A7 7 0 0 0 18.4 17M18.4 9A7 7 0 0 0 5.6 7" />
+      </svg>
       Frissítés
     </button>
   </header>
 
   @if (errorMessage()) {
-    <div class="message message-error" role="alert">
+    <div class="alert-error" role="alert">
       {{ errorMessage() }}
     </div>
   }
 
   @if (batchMessage()) {
-    <div class="message message-success" role="status">
+    <div class="alert-success" role="status">
       {{ batchMessage() }}
     </div>
   }
 
   @if (isLoading() && !summary()) {
-    <div class="loading-panel">
+    <div class="card flex items-center gap-3 p-6 text-slate-500">
+      <span class="spinner"></span>
       Indexelési adatok betöltése...
     </div>
   } @else if (summary(); as currentSummary) {
-    <section class="summary-grid" aria-label="Indexelési összesítés">
-      <article class="summary-card summary-primary">
-        <span class="card-label">Dokumentumok</span>
-        <strong>{{ currentSummary.documents.total }}</strong>
-        <span>
+    <section
+      class="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6"
+      aria-label="Indexelési összesítés">
+      <article class="grid content-start gap-1 rounded-2xl border border-indigo-700 bg-gradient-to-br from-indigo-700 to-indigo-500 p-5 text-white shadow-sm">
+        <span class="text-xs font-semibold tracking-wide text-indigo-100 uppercase">Dokumentumok</span>
+        <strong class="text-3xl font-bold">{{ currentSummary.documents.total }}</strong>
+        <span class="text-sm text-indigo-100">
           {{ indexedPercentage() }}% indexelve
         </span>
       </article>
 
-      <article class="summary-card">
-        <span class="card-label">Indexelve</span>
-        <strong>{{ currentSummary.documents.indexed }}</strong>
-        <span>kereshető dokumentum</span>
+      <article class="card grid content-start gap-1 p-5">
+        <span class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Indexelve</span>
+        <strong class="text-3xl font-bold text-slate-900">{{ currentSummary.documents.indexed }}</strong>
+        <span class="text-sm text-slate-500">kereshető dokumentum</span>
       </article>
 
-      <article class="summary-card">
-        <span class="card-label">Chunkok</span>
-        <strong>{{ currentSummary.chunks.total }}</strong>
-        <span>vektoros szövegrész</span>
+      <article class="card grid content-start gap-1 p-5">
+        <span class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Chunkok</span>
+        <strong class="text-3xl font-bold text-slate-900">{{ currentSummary.chunks.total }}</strong>
+        <span class="text-sm text-slate-500">vektoros szövegrész</span>
       </article>
 
       <article
-        class="summary-card"
-        [class.summary-danger]="hasErrors()">
-        <span class="card-label">Hibás</span>
-        <strong>{{ currentSummary.documents.failed }}</strong>
-        <span>feldolgozási hiba</span>
+        class="grid content-start gap-1 rounded-2xl border p-5 shadow-sm"
+        [class]="hasErrors() ? 'border-red-200 bg-red-50' : 'border-slate-200 bg-white'">
+        <span
+          class="text-xs font-semibold tracking-wide uppercase"
+          [class]="hasErrors() ? 'text-red-700' : 'text-slate-500'">
+          Hibás
+        </span>
+        <strong
+          class="text-3xl font-bold"
+          [class]="hasErrors() ? 'text-red-800' : 'text-slate-900'">
+          {{ currentSummary.documents.failed }}
+        </strong>
+        <span class="text-sm text-slate-500">feldolgozási hiba</span>
       </article>
 
-      <article class="summary-card">
-        <span class="card-label">OCR szükséges</span>
-        <strong>{{ currentSummary.documents.requiresOcr }}</strong>
-        <span>kép alapú dokumentum</span>
+      <article class="card grid content-start gap-1 p-5">
+        <span class="text-xs font-semibold tracking-wide text-slate-500 uppercase">OCR szükséges</span>
+        <strong class="text-3xl font-bold text-slate-900">{{ currentSummary.documents.requiresOcr }}</strong>
+        <span class="text-sm text-slate-500">kép alapú dokumentum</span>
       </article>
 
-      <article class="summary-card">
-        <span class="card-label">Folyamatban</span>
-        <strong>{{ currentSummary.documents.processing }}</strong>
-        <span>aktív feldolgozás</span>
+      <article class="card grid content-start gap-1 p-5">
+        <span class="text-xs font-semibold tracking-wide text-slate-500 uppercase">Folyamatban</span>
+        <strong class="text-3xl font-bold text-slate-900">{{ currentSummary.documents.processing }}</strong>
+        <span class="text-sm text-slate-500">aktív feldolgozás</span>
       </article>
     </section>
 
     @if (currentSummary.latestRun; as latestRun) {
-      <section class="latest-run-card">
+      <section class="card flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <span
-            class="status-badge"
-            [ngClass]="statusClass(latestRun.status)">
+          <span [class]="statusClass(latestRun.status)">
             {{ statusLabel(latestRun.status) }}
           </span>
 
-          <h2>Legutóbbi futás</h2>
+          <h2 class="card-title mt-3">Legutóbbi futás</h2>
 
-          <p>
+          <p class="mt-1 text-sm text-slate-500">
             {{ latestRun.startedAt | date:'yyyy. MM. dd. HH:mm:ss' }}
           </p>
         </div>
 
-        <dl class="latest-run-metrics">
+        <dl class="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-5">
           <div>
-            <dt>Időtartam</dt>
-            <dd>
+            <dt class="text-xs text-slate-500">Időtartam</dt>
+            <dd class="mt-1 text-lg font-bold text-slate-900">
               {{ latestRun.durationSeconds ?? 0 | number:'1.1-1' }} mp
             </dd>
           </div>
 
           <div>
-            <dt>Feldolgozva</dt>
-            <dd>{{ latestRun.processedCount }}</dd>
+            <dt class="text-xs text-slate-500">Feldolgozva</dt>
+            <dd class="mt-1 text-lg font-bold text-slate-900">{{ latestRun.processedCount }}</dd>
           </div>
 
           <div>
-            <dt>Indexelve</dt>
-            <dd>{{ latestRun.indexedCount }}</dd>
+            <dt class="text-xs text-slate-500">Indexelve</dt>
+            <dd class="mt-1 text-lg font-bold text-slate-900">{{ latestRun.indexedCount }}</dd>
           </div>
 
           <div>
-            <dt>Változatlan</dt>
-            <dd>{{ latestRun.skippedUnchangedCount }}</dd>
+            <dt class="text-xs text-slate-500">Változatlan</dt>
+            <dd class="mt-1 text-lg font-bold text-slate-900">{{ latestRun.skippedUnchangedCount }}</dd>
           </div>
 
           <div>
-            <dt>Hibás</dt>
-            <dd>{{ latestRun.failedCount }}</dd>
+            <dt class="text-xs text-slate-500">Hibás</dt>
+            <dd class="mt-1 text-lg font-bold text-slate-900">{{ latestRun.failedCount }}</dd>
           </div>
         </dl>
       </section>
     }
   }
 
-  <section class="content-grid">
-    <article class="panel batch-panel">
-      <div class="panel-header">
-        <div>
-          <p class="eyebrow">SharePoint</p>
-          <h2>Batch indexelés indítása</h2>
-        </div>
+  <section class="grid gap-6 xl:grid-cols-[22rem_minmax(0,1fr)]">
+    <article class="card p-6">
+      <div class="mb-5">
+        <p class="eyebrow">SharePoint</p>
+        <h2 class="card-title mt-1">Batch indexelés indítása</h2>
       </div>
 
       <form
-        class="batch-form"
+        class="grid gap-4"
         (ngSubmit)="startBatch()">
-        <label>
-          <span>Almappa útvonala</span>
+        <label class="grid gap-1.5">
+          <span class="form-label">Almappa útvonala</span>
           <input
             type="text"
             name="folderPath"
+            class="form-input"
             [(ngModel)]="folderPath"
             placeholder="Üresen hagyva a teljes Dokutár">
         </label>
 
-        <label>
-          <span>Dokumentumok maximális száma</span>
-            <input
-              type="number"
-              name="maximumDocuments"
-              [(ngModel)]="maximumDocuments"
-              min="1"
-              max="500"
-              step="1"
-              required>
+        <label class="grid gap-1.5">
+          <span class="form-label">Dokumentumok maximális száma</span>
+          <input
+            type="number"
+            name="maximumDocuments"
+            class="form-input"
+            [(ngModel)]="maximumDocuments"
+            min="1"
+            max="500"
+            step="1"
+            required>
         </label>
 
-        <label class="checkbox-label">
+        <label class="flex items-center gap-2.5 text-sm text-slate-700">
           <input
             type="checkbox"
             name="forceReindex"
+            class="size-4 rounded accent-indigo-600"
             [(ngModel)]="forceReindex">
           <span>Változatlan dokumentumok újraindexelése</span>
         </label>
 
         <button
           type="submit"
-          class="primary-button"
+          class="btn-primary mt-1"
           [disabled]="isStartingBatch()">
           @if (isStartingBatch()) {
+            <span class="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span>
             Indexelés folyamatban...
           } @else {
             Indexelés indítása
@@ -179,69 +200,68 @@
       </form>
 
       @if (activeRun(); as run) {
-      <section class="active-run-card" aria-live="polite">
-
-        <div>
-          <span
-            class="status-badge status-running">
-            Háttérindexelés folyamatban
-          </span>
-
-          <h3>
-            {{ run.processedCount }} /
-            {{ run.requestedMaximumDocuments }}
-            dokumentum feldolgozva
-          </h3>
-        </div>
-
-        <dl class="active-run-metrics">
+        <section
+          class="mt-6 grid gap-4 rounded-2xl border border-blue-200 bg-blue-50 p-5"
+          aria-live="polite">
           <div>
-            <dt>Indexelve</dt>
-            <dd>{{ run.indexedCount }}</dd>
+            <span class="badge-running">
+              Háttérindexelés folyamatban
+            </span>
+
+            <h3 class="mt-2.5 font-semibold text-slate-900">
+              {{ run.processedCount }} /
+              {{ run.requestedMaximumDocuments }}
+              dokumentum feldolgozva
+            </h3>
           </div>
 
-          <div>
-            <dt>Változatlan</dt>
-            <dd>{{ run.skippedUnchangedCount }}</dd>
-          </div>
+          <dl class="flex gap-7">
+            <div>
+              <dt class="text-xs text-slate-500">Indexelve</dt>
+              <dd class="mt-1 text-lg font-bold text-slate-900">{{ run.indexedCount }}</dd>
+            </div>
 
-          <div>
-            <dt>Hibás</dt>
-            <dd>{{ run.failedCount }}</dd>
-          </div>
-        </dl>
+            <div>
+              <dt class="text-xs text-slate-500">Változatlan</dt>
+              <dd class="mt-1 text-lg font-bold text-slate-900">{{ run.skippedUnchangedCount }}</dd>
+            </div>
 
-        <progress
-          [value]="run.processedCount"
-          [max]="run.requestedMaximumDocuments">
-        </progress>
-      </section>
-    }
+            <div>
+              <dt class="text-xs text-slate-500">Hibás</dt>
+              <dd class="mt-1 text-lg font-bold text-slate-900">{{ run.failedCount }}</dd>
+            </div>
+          </dl>
+
+          <progress
+            class="h-2.5 w-full accent-indigo-600"
+            [value]="run.processedCount"
+            [max]="run.requestedMaximumDocuments">
+          </progress>
+        </section>
+      }
     </article>
 
-    <article class="panel runs-panel">
-      <div class="panel-header">
-        <div>
-          <p class="eyebrow">Előzmények</p>
-          <h2>Legutóbbi futások</h2>
-        </div>
+    <article class="card min-w-0 p-6">
+      <div class="mb-5">
+        <p class="eyebrow">Előzmények</p>
+        <h2 class="card-title mt-1">Legutóbbi futások</h2>
       </div>
 
       @if (runs().length === 0) {
-        <p class="empty-state">
+        <p class="rounded-xl border border-dashed border-slate-300 p-6 text-center text-sm text-slate-500">
           Még nincs indexelési futás.
         </p>
       } @else {
-        <div class="table-container">
-          <table>
+        <div class="-mx-6 overflow-x-auto">
+          <table class="data-table">
             <thead>
               <tr>
-                <th>Kezdés</th>
+                <th class="pl-6">Kezdés</th>
                 <th>Státusz</th>
                 <th>Feldolgozva</th>
                 <th>Indexelve</th>
                 <th>Hibás</th>
-                <th>Időtartam</th>
+                <th class="pr-6">Időtartam</th>
               </tr>
             </thead>
 
@@ -251,23 +271,21 @@
                 track trackRun($index, run)
               ) {
                 <tr
-                  class="clickable-row"
-                  [class.selected-row]="selectedRun()?.id === run.id"
+                  class="cursor-pointer transition hover:bg-slate-50"
+                  [class.bg-indigo-50]="selectedRun()?.id === run.id"
                   (click)="selectRun(run)">
-                  <td>
+                  <td class="pl-6 whitespace-nowrap">
                     {{ run.startedAt | date:'yyyy. MM. dd. HH:mm' }}
                   </td>
                   <td>
-                    <span
-                      class="status-badge"
-                      [ngClass]="statusClass(run.status)">
+                    <span [class]="statusClass(run.status)">
                       {{ statusLabel(run.status) }}
                     </span>
                   </td>
                   <td>{{ run.processedCount }}</td>
                   <td>{{ run.indexedCount }}</td>
                   <td>{{ run.failedCount }}</td>
-                  <td>
+                  <td class="pr-6 whitespace-nowrap">
                     {{ run.durationSeconds ?? 0 | number:'1.1-1' }} mp
                   </td>
                 </tr>
@@ -280,29 +298,28 @@
   </section>
 
   @if (isLoadingRun()) {
-    <section class="panel">
+    <section class="card flex items-center gap-3 p-6 text-slate-500">
+      <span class="spinner"></span>
       Futásrészletek betöltése...
     </section>
   } @else if (selectedRun(); as run) {
-    <section class="panel run-details-panel">
-      <div class="panel-header">
-        <div>
+    <section class="card min-w-0 p-6">
+      <div class="flex items-start justify-between gap-4">
+        <div class="min-w-0">
           <p class="eyebrow">Futás részletei</p>
-          <h2>{{ run.id }}</h2>
+          <h2 class="card-title mt-1 truncate font-mono text-base">{{ run.id }}</h2>
         </div>
 
         <button
           type="button"
-          class="text-button"
+          class="btn-ghost"
           (click)="selectedRun.set(null)">
           Bezárás
         </button>
       </div>
 
-      <div class="run-summary">
-        <span
-          class="status-badge"
-          [ngClass]="statusClass(run.status)">
+      <div class="my-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+        <span [class]="statusClass(run.status)">
           {{ statusLabel(run.status) }}
         </span>
 
@@ -315,15 +332,15 @@
         </span>
       </div>
 
-      <div class="table-container">
-        <table>
+      <div class="-mx-6 overflow-x-auto">
+        <table class="data-table">
           <thead>
             <tr>
-              <th>Dokumentum</th>
+              <th class="pl-6">Dokumentum</th>
               <th>Státusz</th>
               <th>Chunk</th>
               <th>Karakter</th>
-              <th>Üzenet</th>
+              <th class="pr-6">Üzenet</th>
             </tr>
           </thead>
 
@@ -333,17 +350,15 @@
               track trackRunItem($index, item)
             ) {
               <tr>
-                <td>{{ item.fileName ?? item.sourceId }}</td>
+                <td class="pl-6 font-medium text-slate-900">{{ item.fileName ?? item.sourceId }}</td>
                 <td>
-                  <span
-                    class="status-badge"
-                    [ngClass]="statusClass(item.status)">
+                  <span [class]="statusClass(item.status)">
                     {{ statusLabel(item.status) }}
                   </span>
                 </td>
                 <td>{{ item.chunkCount }}</td>
                 <td>{{ item.characterCount }}</td>
-                <td>{{ item.message }}</td>
+                <td class="pr-6 text-slate-500">{{ item.message }}</td>
               </tr>
             }
           </tbody>

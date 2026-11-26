@@ -15,7 +15,6 @@ import { IndexingService } from '../../../../core/services/indexing.service';
     DecimalPipe
   ],
   templateUrl: './indexing-dashboard.component.html',
-  styleUrl: './indexing-dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexingDashboardComponent implements OnInit, OnDestroy {
@@ -217,21 +216,21 @@ export class IndexingDashboardComponent implements OnInit, OnDestroy {
     switch (status) {
       case 'Completed':
       case 'Indexed':
-        return 'status-success';
+        return 'badge-success';
 
       case 'Running':
-        return 'status-running';
+        return 'badge-running';
 
       case 'CompletedWithErrors':
       case 'RequiresOcr':
-        return 'status-warning';
+        return 'badge-warning';
 
       case 'Failed':
       case 'NotFound':
-        return 'status-error';
+        return 'badge-error';
 
       default:
-        return 'status-neutral';
+        return 'badge-neutral';
     }
   }
 
