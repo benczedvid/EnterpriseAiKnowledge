@@ -121,6 +121,16 @@
     },
     {
       "key": "gate-pass",
+      "fileName": "Kapujegy nyomtatvány",
+      "sourceId": "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4",
+      "documentType": "form",
+      "expectedProcessingStatus": "Indexed",
+      "enabled": true,
+      "supersedesSourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
+      "notes": "Current version. Format and chunk-count bounds still need to be measured."
+    },
+    {
+      "key": "gate-pass-2013",
       "fileName": "201308 Kapujegy nyomtatvány minta.pdf",
       "sourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
       "format": "pdf",
@@ -131,18 +141,8 @@
       "maximumChunkCount": 3,
       "minimumAverageChunkLength": 1000,
       "enabled": true,
-      "supersedesSourceId": "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4",
-      "notes": "Current version."
-    },
-    {
-      "key": "gate-pass-outdated",
-      "fileName": "Kapujegy nyomtatvány",
-      "sourceId": "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4",
-      "documentType": "form",
-      "expectedProcessingStatus": "Indexed",
-      "enabled": true,
-      "supersededBySourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
-      "notes": "Outdated version. Answer and retrieval cases expect the 201308 PDF."
+      "supersededBySourceId": "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4",
+      "notes": "Outdated version. Kept for parser evaluation (parser/gate-pass-parser.json); answer and retrieval cases expect the current version."
     },
     {
       "key": "stock-clearance-close",

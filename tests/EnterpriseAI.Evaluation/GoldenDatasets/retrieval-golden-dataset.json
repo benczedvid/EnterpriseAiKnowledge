@@ -9,7 +9,7 @@
       "category": "fact-list",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
@@ -30,7 +30,7 @@
       "category": "fact",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
@@ -50,7 +50,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
@@ -70,7 +70,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7"
+        "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4"
       ],
       "expectedDocumentTitleContains": "Kapujegy",
       "requiredContentTerms": [
