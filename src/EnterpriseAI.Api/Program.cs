@@ -193,6 +193,47 @@ builder.Services
         "and MaximumBatchSize.")
     .ValidateOnStart();
 
+builder.Services
+    .AddOptions<DocumentVersioningOptions>()
+    .Bind(
+        builder.Configuration.GetSection(
+            DocumentVersioningOptions.SectionName))
+    .Validate(
+        options => options.SupersededDocuments.All(
+            document =>
+                !string.IsNullOrWhiteSpace(document.SourceId)
+                && !string.IsNullOrWhiteSpace(
+                    document.SupersededBySourceId)),
+        "DocumentVersioning:SupersededDocuments entries must have " +
+        "both SourceId and SupersededBySourceId.")
+    .Validate(
+        options => options.SupersededDocuments.All(
+            document => !string.Equals(
+                document.SourceId.Trim(),
+                document.SupersededBySourceId.Trim(),
+                StringComparison.Ordinal)),
+        "DocumentVersioning:SupersededDocuments entries must not " +
+        "supersede themselves.")
+    .Validate(
+        options =>
+        {
+            /*
+             * Az aktuális változat nem lehet maga is elavult,
+             * különben a dokumentumcsalád minden változata
+             * kiesne a keresésből.
+             */
+            var supersededSourceIds = options
+                .GetSupersededSourceIds()
+                .ToHashSet(StringComparer.Ordinal);
+
+            return options.SupersededDocuments.All(
+                document => !supersededSourceIds.Contains(
+                    document.SupersededBySourceId.Trim()));
+        },
+        "DocumentVersioning:SupersededDocuments must not point to " +
+        "a SupersededBySourceId that is itself superseded.")
+    .ValidateOnStart();
+
 builder.Services.AddHttpClient<IEmbeddingService, OllamaEmbeddingService>(
     (serviceProvider, client) =>
     {

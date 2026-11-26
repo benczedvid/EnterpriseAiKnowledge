@@ -1,8 +1,11 @@
 using System.Data;
+using EnterpriseAI.Application.Abstractions.Documents;
 using EnterpriseAI.Application.Abstractions.Persistence;
 using EnterpriseAI.Domain.Documents;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Npgsql;
+using NpgsqlTypes;
 using Pgvector;
 
 namespace EnterpriseAI.Infrastructure.Persistence.Repositories;
@@ -11,12 +14,19 @@ public sealed class EfSemanticSearchRepository : ISemanticSearchRepository
 {
     private const int MaximumResultLimit = 100;
     private readonly EnterpriseAiDbContext _dbContext;
+    private readonly string[] _supersededSourceIds;
 
-    public EfSemanticSearchRepository(EnterpriseAiDbContext dbContext)
+    public EfSemanticSearchRepository(
+        EnterpriseAiDbContext dbContext,
+        IOptions<DocumentVersioningOptions> versioningOptions)
     {
         ArgumentNullException.ThrowIfNull(dbContext);
+        ArgumentNullException.ThrowIfNull(versioningOptions);
 
         _dbContext = dbContext;
+        _supersededSourceIds = versioningOptions.Value
+            .GetSupersededSourceIds()
+            .ToArray();
     }
 
     public async Task<IReadOnlyList<SemanticSearchResult>>SearchAsync(
@@ -74,6 +84,9 @@ public sealed class EfSemanticSearchRepository : ISemanticSearchRepository
                     document."ProcessingStatus" =
                         @indexedStatus
                     AND document."IsDeleted" = FALSE
+                    AND NOT (
+                        document."SourceId" =
+                            ANY(@supersededSourceIds))
                 ORDER BY
                     chunk."Embedding" <=>
                         @queryEmbedding,
@@ -101,9 +114,22 @@ public sealed class EfSemanticSearchRepository : ISemanticSearchRepository
                     TypedValue = limit
                 };
 
+            /*
+             * Az elavult dokumentumváltozatok kizárása a LIMIT
+             * előtt történik, így a találati lista helyét nem
+             * foglalják el.
+             */
+            var supersededSourceIdsParameter = new NpgsqlParameter<string[]>
+                {
+                    ParameterName = "supersededSourceIds",
+                    NpgsqlDbType = NpgsqlDbType.Array | NpgsqlDbType.Text,
+                    TypedValue = _supersededSourceIds
+                };
+
             command.Parameters.Add(embeddingParameter);
             command.Parameters.Add(indexedStatusParameter);
             command.Parameters.Add(limitParameter);
+            command.Parameters.Add(supersededSourceIdsParameter);
 
             var results = new List<SemanticSearchResult>(limit);
 
