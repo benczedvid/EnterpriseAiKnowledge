@@ -1,9 +1,9 @@
 {
   "documentKey": "stock-clearance-close",
-  "sourceId": "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE",
-  "fileName": "2017. évi 13. sz. ügyviteli utasítás - Készletkisöprési aktivitás zárása.docx",
+  "sourceId": "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX",
+  "fileName": "2018. évi 7. sz. ügyviteli utasítás - Készletkisöprési aktivitás zárása.docx",
   "format": "docx",
-  "datasetVersion": "1.0",
+  "datasetVersion": "1.1",
   "cases": [
     {
       "id": "stock-clearance-close-001",
@@ -11,7 +11,7 @@
       "category": "procedure",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "expectedSectionTitleContains": null,
@@ -42,7 +42,7 @@
       "category": "procedure",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "expectedSectionTitleContains": null,
@@ -70,7 +70,7 @@
       "category": "fact",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "expectedSectionTitleContains": null,
@@ -95,7 +95,7 @@
       "category": "fact",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "expectedSectionTitleContains": null,
@@ -121,7 +121,7 @@
       "category": "responsibility",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "expectedSectionTitleContains": null,
@@ -147,7 +147,7 @@
       "category": "deadline",
       "shouldAnswer": true,
       "expectedSourceIds": [
-        "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE"
+        "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX"
       ],
       "expectedDocumentTitleContains": "Készletkisöprési aktivitás zárása",
       "expectedSectionTitleContains": null,

@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "createdAt": "2026-11-22",
   "documents": [
     {
@@ -121,6 +121,16 @@
     },
     {
       "key": "gate-pass",
+      "fileName": "Kapujegy nyomtatvány",
+      "sourceId": "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4",
+      "documentType": "form",
+      "expectedProcessingStatus": "Indexed",
+      "enabled": true,
+      "supersedesSourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
+      "notes": "Current version. Format and chunk-count bounds still need to be measured."
+    },
+    {
+      "key": "gate-pass-2013",
       "fileName": "201308 Kapujegy nyomtatvány minta.pdf",
       "sourceId": "01CJUSBULBMM7CVI6WFBD245Y4RN5TVFF7",
       "format": "pdf",
@@ -130,10 +140,23 @@
       "minimumChunkCount": 2,
       "maximumChunkCount": 3,
       "minimumAverageChunkLength": 1000,
-      "enabled": true
+      "enabled": true,
+      "supersededBySourceId": "01CJUSBUMAOC4P4LAZ55G36LGHFFM2MRN4",
+      "notes": "Outdated version. Kept for parser evaluation (parser/gate-pass-parser.json); answer and retrieval cases expect the current version."
     },
     {
       "key": "stock-clearance-close",
+      "fileName": "2018. évi 7. sz. ügyviteli utasítás - Készletkisöprési aktivitás zárása.docx",
+      "sourceId": "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX",
+      "format": "docx",
+      "documentType": "business-instruction",
+      "expectedProcessingStatus": "Indexed",
+      "enabled": true,
+      "supersedesSourceId": "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE",
+      "notes": "Current version. Chunk-count bounds still need to be measured."
+    },
+    {
+      "key": "stock-clearance-close-2017",
       "fileName": "2017. évi 13. sz. ügyviteli utasítás - Készletkisöprési aktivitás zárása.docx",
       "sourceId": "01CJUSBUKI5QT76M4G4BGZ6WLRRYDI5MGE",
       "format": "docx",
@@ -143,7 +166,9 @@
       "minimumChunkCount": 2,
       "maximumChunkCount": 5,
       "minimumAverageChunkLength": 800,
-      "enabled": true
+      "enabled": true,
+      "supersededBySourceId": "01CJUSBULYKUFAHXMLUBB36VEYTBEDW6KX",
+      "notes": "Outdated version. Answer and retrieval cases expect the 2018 version."
     },
     {
       "key": "placement-handbook",
